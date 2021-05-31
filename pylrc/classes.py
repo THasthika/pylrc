@@ -1,3 +1,4 @@
+from cmath import sin
 from .utilities import unpackTimecode, findEvenSplit
 
 
@@ -102,6 +103,23 @@ class Lyrics(list):
         self.offset = 0
 
         self.extend(items)
+
+    def getLyricsBetween(self, startTime, endTime):
+        sindex = 0
+        eindex = 0
+        i = sindex
+        while i < len(self):
+            if self[i].time >= startTime:
+                sindex = i
+                break
+            i += 1
+        eindex = sindex
+        while i < (len(self) - 1):
+            if self[i+1].time > endTime:
+                eindex = i
+            i += 1
+        return self[sindex:eindex+1]
+
 
     def toSRT(self):
         """Returns an SRT string of the LRC data"""
