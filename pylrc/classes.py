@@ -114,6 +114,8 @@ class Lyrics(list):
                 break
             i += 1
         eindex = sindex
+        if self[eindex].time > endTime:
+            return []
         while i < (len(self) - 1):
             if self[i+1].time > endTime:
                 eindex = i
